@@ -1,0 +1,1 @@
+a->sisi1->titikAkhir->y

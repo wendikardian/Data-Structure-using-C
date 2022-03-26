@@ -1,0 +1,14 @@
+scanf("%d", &id);
+    // scanf("%s", nama);
+    // scanf("%d", &usia);
+    // addAkhir(id, nama, usia, New);
+    // scanf("%d", &id);
+    // scanf("%s", nama);
+    // scanf("%d", &usia);
+    // scanf("%d", &id2);
+    // addAfter(id, nama, usia, id2, New);
+    // scanf("%d", &id);
+    // scanf("%s", nama);
+    // scanf("%d", &usia);
+    // scanf("%d", &id2);
+    // addBefore(id, nama, usia, id2, New);
