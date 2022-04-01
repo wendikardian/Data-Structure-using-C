@@ -44,7 +44,6 @@ int pop(struct stack *st){
 			st->top = st->top - 1;
 			return 0;
 		}
-        
     }
 }
 
@@ -64,6 +63,5 @@ int main(){
         desimal = desimal + pop(&biner);
     }
     printf("\n%d", desimal);
-    
     return 0;
 }
