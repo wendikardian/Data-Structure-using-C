@@ -66,15 +66,51 @@ void displayData(Element *start){
     }
 }
 
+void delAwal(Element **start){
+    Element *ptr = *start;
+    *start = ptr->next;
+    free(ptr);
+}
+
+void delAkhir(Element *start){
+    Element *ptr = start;
+    while(ptr->next->next != NULL){
+        ptr = ptr->next;
+    }
+    Element *ptr2 = ptr->next;
+    ptr->next = NULL;
+    free(ptr2);
+}
+
+void delData(Element *start){
+    Element *ptr = start;
+    int data;
+    printf("\nMasukan data mana yang mau di hapus : ");
+    scanf("%d", &data);
+    while(ptr->next->data != data){
+        ptr = ptr->next;
+    }
+    Element *ptr2= ptr->next;
+    ptr->next = ptr2->next;
+    free(ptr2);
+}
+
 int main(){
     Element *start;
     start = createElement();
+    addAwal(&start);
     addAwal(&start);
     addAkhir(start);
     displayData(start);
     addAfter(start);
     displayData(start);
     addBefore(start);
+    displayData(start);
+    delAwal(&start);
+    displayData(start);
+    delAkhir(start);
+    displayData(start);
+    delData(start);
     displayData(start);
     
     return 0;
