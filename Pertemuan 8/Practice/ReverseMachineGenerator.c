@@ -8,6 +8,7 @@ typedef struct stack{
     int top;
 }Stack;
 
+/// data structure
 Stack myStack;
 Stack temp;
 
