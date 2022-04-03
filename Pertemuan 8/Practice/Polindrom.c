@@ -73,13 +73,6 @@ int main(){
             reverseStack(&myStack, &temp);
         }
     }
-
-    // push(&myStack, 'A');
-    // push(&myStack, 'B');
-    // push(&myStack, 'C');
-    // push(&myStack, 'D');
-    // char helo = pop(&myStack);
-    // reverseStack(&myStack, &temp);
     displayStack(myStack);
     return 0;
 }
