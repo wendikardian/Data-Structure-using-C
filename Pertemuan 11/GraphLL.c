@@ -8,13 +8,6 @@ struct node{
 
 struct node *gnode;
 
-struct node *createNode(int vertex){
-    struct node *new_node;
-    new_node = (struct node *)malloc(sizeof(struct node));
-    new_node->vertex = vertex;
-    new_node->next = NULL;
-    return new_node;
-}
 
 void createGraph(struct node *Adj[], int no_of_nodes){
     struct node *new_node, *last;
@@ -26,7 +19,9 @@ void createGraph(struct node *Adj[], int no_of_nodes){
         for (j = 1; j<= n; j++){
             printf("\nEnter the neighbour %d of %d : ", j , i);
             scanf("%d", &val);
-            new_node = createNode(val);
+            new_node = (struct node *)malloc(sizeof(struct node));
+            new_node->vertex = val;
+            new_node->next = NULL;
             if(Adj[i] = NULL){
                 Adj[i] = new_node;
             }else{
@@ -63,4 +58,17 @@ void deleteGraph(struct node *Adj[], int no_of_nodes){
         }
         Adj[i] =NULL;
     }
+}
+
+int main(){
+    struct node *Adj[10];
+    int i, no_of_nodes;
+    printf("\nEnter the number of nodes in G : ");
+    scanf("%d", &no_of_nodes);
+    for(i = 0; i < no_of_nodes; i++){
+        Adj[i] = NULL;
+    }
+    createGraph(Adj, no_of_nodes);
+    printf("\nThe graph is : ");
+    displayGraph(Adj, no_of_nodes);
 }
