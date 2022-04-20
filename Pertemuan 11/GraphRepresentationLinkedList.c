@@ -18,7 +18,8 @@ typedef struct graph{
 }Graph;
 
 
-Graph *createGraph(struct graph *g){
+Graph *createGraph(){
+    Graph *g = (Graph *)malloc(sizeof(Graph));
     g->first = NULL;
     return g;
 }
@@ -26,7 +27,7 @@ Graph *createGraph(struct graph *g){
 void createSimpul(Graph *G, char a){
     Simpul *simpulBaru;
     // printf("%c", a);
-    printf("HELLo");
+    // printf("HELLo");
     simpulBaru = (Simpul *)malloc(sizeof(Simpul));
     simpulBaru->idSimpul = a;
     simpulBaru->tujuan = NULL;
@@ -51,7 +52,6 @@ void addEdge(Simpul *awal, Simpul *akhir, int nilaiJalur){
     if(ptr == NULL){
         ptr = new_edge;
     }else{
-        printf("%d", ptr);
         while(ptr->next != NULL){
             ptr = ptr->next;
         }
@@ -61,8 +61,12 @@ void addEdge(Simpul *awal, Simpul *akhir, int nilaiJalur){
 
 int main(){ 
     Graph *pertemanan;
-    pertemanan->first = NULL;
+    pertemanan = createGraph();
+    // printf("TEXT");
+    // pertemanan->first = NULL;
     createSimpul(pertemanan, 'A');
-    addEdge(pertemanan->first, pertemanan->first, 2);
-    // printf("\n%c", pertemanan->first->idSimpul);
+    printf("%c", pertemanan->first->idSimpul);
+    addEdge(pertemanan->first, pertemanan->first, 3);
+    printf("\n%d", pertemanan->first->tujuan->cost);
+    return 0;
 }
