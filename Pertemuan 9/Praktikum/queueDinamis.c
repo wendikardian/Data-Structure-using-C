@@ -140,6 +140,7 @@ void minMaxAge(queue Q){
 }
 
 void changeData(queue Q){
+	int dataDidntFound = 0;
 	if(isEmpty(Q)){
 		printf("Queue us Empty\n");
 	}else{
@@ -148,20 +149,28 @@ void changeData(queue Q){
 		fflush(stdin);gets(name);
 		Element *ptr = Q.head;
 		while((strcmp(ptr->data.nama, name) != 0)){
+			if(ptr->next == NULL && (strcmp(ptr->data.nama, name) != 0) ){
+				printf("Data did'nt exist");
+				dataDidntFound = 1;
+				break;
+			}
 			ptr =  ptr->next;
 		}
-		if(ptr != NULL){
-			char editName[50];
-			int editAge;
-			printf("Enter the new name : ");
-			fflush(stdin);gets(editName);
-			printf("Enter the new age : ");
-			scanf("%d", &editAge);
-			strcpy(ptr->data.nama, editName);
-			ptr->data.usia = editAge;
-		}else{
-			printf("The name out of the queue");
+		if(dataDidntFound != 1){
+			if(ptr != NULL){
+				char editName[50];
+				int editAge;
+				printf("Enter the new name : ");
+				fflush(stdin);gets(editName);
+				printf("Enter the new age : ");
+				scanf("%d", &editAge);
+				strcpy(ptr->data.nama, editName);
+				ptr->data.usia = editAge;
+			}else{
+				printf("The name out of the queue");
+			}
 		}
+		
 	}
 }
 
