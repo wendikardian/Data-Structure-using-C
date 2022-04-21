@@ -4,10 +4,10 @@ const depthFirstPrintf = (graph, source) => {
 
     while(stack.length > 0){
         const current = stack.pop()
-        console.log(stack);
+        // console.log(stack);
         for (let neighbor of graph[current]){
             console.log(neighbor)
-            stack.push(neighbor);
+            // stack[stack.length] = neighbor
         }
     }
 }
