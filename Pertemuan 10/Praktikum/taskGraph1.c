@@ -1,4 +1,5 @@
-// Asisten Praktikum Struktur Data 2022
+// STRUKTUR DATA GRAPH STATIC
+// WENDI KARDIAN (2100016) - Pendidikan Ilmu Komputer - A
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,8 +22,8 @@ typedef struct ruas{
 
 simpul *awal = NULL;
 
-/*buat node baru*/
-simpul *createSimpul (char a, char b[]){
+// Membuat vertex baru
+simpul *createVertex (char a, char b[]){
 	simpul *simpulBaru = (simpul*)malloc(sizeof(simpul));
 	simpulBaru->label = a;
 	strcpy(simpulBaru->id,b);
@@ -32,7 +33,7 @@ simpul *createSimpul (char a, char b[]){
 	return simpulBaru;
 }
 
-/*fungsi untuk menemukan simpul didalam graph*/
+/*fungsi untuk menemukan vertex didalam graph*/
 simpul *cariSimpul(char a) {
 	simpul *bantu = awal;
 	
@@ -49,24 +50,22 @@ simpul *cariSimpul(char a) {
 	return bantu;
 }
 
-/*menambahkan node bila belum ada dalam graph*/
-void tambahVertex(char a, char b[]){
+void tambahVertex(char a, char b[]){ //menanbahkan vertex berdasarkan label dan idnya lalu disambungkan
 	simpul *prev = cariSimpul(a);
 	
 	if(prev == NULL){
-		simpul *baru = createSimpul(a, b);
+		simpul *baru = createVertex(a, b);
 		awal = baru;
 	}
 	else{
 		if((prev->nextVertex == NULL) && (prev->label != a)){
-			simpul *baru = createSimpul(a, b);
+			simpul *baru = createVertex(a, b);
 			prev->nextVertex = baru;
 		}
 	}
 }
 
-/*buat edge baru*/
-void createEdge (simpul *a, simpul *t, char bobot[]){
+void createEdge (simpul *a, simpul *t, char bobot[]){ //membuat hubungan antar vertex
 	ruas *newEdge = (ruas*)malloc(sizeof(ruas));
 	strcpy(newEdge->bobot,bobot);
 	newEdge->nextEdge = NULL;
@@ -84,15 +83,15 @@ void createEdge (simpul *a, simpul *t, char bobot[]){
 	}
 }
 
-void tambahEdge(char Vasal, char nilaiEdge[], char Vtujuan){
+void tambahEdge(char Vasal, char nilaiEdge[], char Vtujuan){ //menambahkan edge 
 	simpul *a,*t;
 	a = cariSimpul(Vasal);
 	t = cariSimpul(Vtujuan);
 	createEdge(a,t,nilaiEdge);
 }
 
-/*cetak graph*/
-void cetakGraph(){
+// Display the graph
+void display(){
 	simpul *tempSimpul = awal;
 	printf("|-----------------------------------------------------------| \n");
 	printf("|                 NILAI GRAPH                               | \n");
@@ -147,7 +146,7 @@ int main(){
 	tambahEdge('C',"6",'E');
 	tambahEdge('D',"8",'C');
 	tambahEdge('D',"3",'E');
-	cetakGraph();
+	display();
 	// checkVertex();
 	
 	return 0;

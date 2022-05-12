@@ -1,10 +1,11 @@
-// Asisten Praktikum Struktur Data 2022
+// STRUKTUR DATA GRAPH DINAMIS
+// MIRIP SEPERTI YANG PERTAMA AKAN TETAPI DIBUATKAN DALAM BENTUK MENU
+// WENDI KARDIAN (2100016) - Pendidikan Ilmu Komputer - A
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-/*struct untuk vertex*/
 typedef struct simpul{				
 	struct ruas *jalur;
 	struct simpul *nextVertex;
@@ -12,7 +13,6 @@ typedef struct simpul{
 	char id[2];
 }simpul;
 
-/*struct untuk edge*/
 typedef struct ruas{
 	struct ruas *nextEdge;
 	struct simpul *vertexTujuan;
@@ -21,8 +21,8 @@ typedef struct ruas{
 
 simpul *awal = NULL;
 
-/*buat node baru*/
-simpul *createSimpul (char a, char b[]){
+//Membuat vertex baru
+simpul *createVertex (char a, char b[]){
 	simpul *simpulBaru = (simpul*)malloc(sizeof(simpul));
 	simpulBaru->label = a;
 	strcpy(simpulBaru->id,b);
@@ -54,12 +54,12 @@ void tambahVertex(char a, char b[]){
 	simpul *prev = cariSimpul(a);
 	
 	if(prev == NULL){
-		simpul *baru = createSimpul(a, b);
+		simpul *baru = createVertex(a, b);
 		awal = baru;
 	}
 	else{
 		if((prev->nextVertex == NULL) && (prev->label != a)){
-			simpul *baru = createSimpul(a, b);
+			simpul *baru = createVertex(a, b);
 			prev->nextVertex = baru;
 		}
 	}
@@ -91,7 +91,7 @@ void tambahEdge(char Vasal, char nilaiEdge[], char Vtujuan){
 	createEdge(a,t,nilaiEdge);
 }
 
-void cetakGraph(){
+void display(){
 	simpul *tempSimpul = awal;
 	printf("|-----------------------------------------------------------| \n");
 	printf("|                 NILAI GRAPH                               | \n");
@@ -129,9 +129,7 @@ void checkVertex(){
 }
 
 int main(){
-	printf("|-----------------------------------------------------------| \n");
-	printf("|                 GRAPH APK                               | \n");
-	printf("|-----------------------------------------------------------| \n");
+	
     int option;
     char vertex1;
     char vertex2;
@@ -139,6 +137,9 @@ int main(){
     char id2[2];
     char bobot[2];
     do{
+        printf("|-----------------------------------------------------------| \n");
+        printf("|                 GRAPH APK                               | \n");
+        printf("|-----------------------------------------------------------| \n");
         printf("Menus : \n");
         printf("1. Add Edge\n");
         printf("2. Display Graph\n");
@@ -162,7 +163,7 @@ int main(){
                 tambahEdge(vertex1, bobot, vertex2);
                 break;
             case 2: 
-                cetakGraph();
+                display();
                 break;
         }
     }while(option != 3);
