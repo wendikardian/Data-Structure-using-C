@@ -1,1 +1,2 @@
-nextVertex
+
+	cetakGraph();

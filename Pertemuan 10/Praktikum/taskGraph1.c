@@ -22,9 +22,10 @@ typedef struct ruas{
 simpul *awal = NULL;
 
 /*buat node baru*/
-simpul *createSimpul (char a){
+simpul *createSimpul (char a, char b[]){
 	simpul *simpulBaru = (simpul*)malloc(sizeof(simpul));
 	simpulBaru->label = a;
+	strcpy(simpulBaru->id,b);
 	simpulBaru->jalur = NULL;
 	simpulBaru->nextVertex = NULL;
 	
@@ -40,23 +41,25 @@ simpul *cariSimpul(char a) {
 			if(bantu->label == a){
 				break;
 			}
+	
 			bantu = bantu->nextVertex;
 		}
 	}
+	
 	return bantu;
 }
 
 /*menambahkan node bila belum ada dalam graph*/
-void tambahVertex(char a){
+void tambahVertex(char a, char b[]){
 	simpul *prev = cariSimpul(a);
 	
 	if(prev == NULL){
-		simpul *baru = createSimpul(a);
+		simpul *baru = createSimpul(a, b);
 		awal = baru;
 	}
 	else{
 		if((prev->nextVertex == NULL) && (prev->label != a)){
-			simpul *baru = createSimpul(a);
+			simpul *baru = createSimpul(a, b);
 			prev->nextVertex = baru;
 		}
 	}
@@ -81,39 +84,37 @@ void createEdge (simpul *a, simpul *t, char bobot[]){
 	}
 }
 
-/*menambahkan edge*/
 void tambahEdge(char Vasal, char nilaiEdge[], char Vtujuan){
 	simpul *a,*t;
-	
-	if (cariSimpul(Vasal) == NULL){
-		tambahVertex(Vasal);
-	}
-	if (cariSimpul(Vtujuan) == NULL){
-		tambahVertex(Vtujuan);
-	}
-	
 	a = cariSimpul(Vasal);
 	t = cariSimpul(Vtujuan);
-	
 	createEdge(a,t,nilaiEdge);
 }
 
 /*cetak graph*/
 void cetakGraph(){
 	simpul *tempSimpul = awal;
-	printf("\n|                 NILAI GRAPH                               | \n");
+	printf("|-----------------------------------------------------------| \n");
+	printf("|                 NILAI GRAPH                               | \n");
 	printf("|-----------------------------------------------------------| \n");
 	if (tempSimpul != NULL) {
 		while (tempSimpul != NULL){
-			printf("\n --| Vertex %c terhubung dengan edge : \n", tempSimpul->label);
-			ruas *tempEdge = tempSimpul->jalur;
-			while (tempEdge != NULL){
-				printf(" ------| %s menuju vertex %c \n",tempEdge->bobot, tempEdge->vertexTujuan->label);
-				tempEdge = tempEdge->nextEdge;
+			if(tempSimpul->jalur != NULL){
+				printf("\n Vertex %c yang memiliki id %s terhubung dengan edge : \n", tempSimpul->label, tempSimpul->id);
+				ruas *tempEdge = tempSimpul->jalur;
+				while (tempEdge != NULL){
+					printf(" ------ %s menuju vertex %c \n",tempEdge->bobot, tempEdge->vertexTujuan->label);
+					tempEdge = tempEdge->nextEdge;
+				}
+				printf("\n");
+				tempSimpul = tempSimpul->nextVertex;
+			}else{
+				printf("\nVertex %c yang memiliki id %s tidak berhubungan dengan edge \n", tempSimpul->label, tempSimpul->id);
+				tempSimpul = tempSimpul->nextVertex;
 			}
-			printf("\n");
-			tempSimpul = tempSimpul->nextVertex;
+		printf("-----------------------------------------------------------\n");
 		}
+		
 	}
 	else{
 		printf("Graph Kosong");
@@ -130,12 +131,14 @@ void checkVertex(){
 
 int main(){
 	
+	tambahVertex('A', "v1");
+	tambahVertex('B', "v2");
+	tambahVertex('C', "v3");
+	tambahVertex('D', "v4");
+	tambahVertex('E', "v5");
+	tambahVertex('E', "v5");
 	tambahEdge('A',"5",'B');
 	tambahEdge('A',"e2",'D');
-	tambahVertex('B');
-	tambahVertex('C');
-	tambahVertex('D');
-	tambahVertex('E');
 	tambahEdge('B',"4",'A');
 	tambahEdge('B',"3",'C');
 	tambahEdge('B',"12",'E');
@@ -144,7 +147,6 @@ int main(){
 	tambahEdge('C',"6",'E');
 	tambahEdge('D',"8",'C');
 	tambahEdge('D',"3",'E');
-	
 	cetakGraph();
 	// checkVertex();
 	
