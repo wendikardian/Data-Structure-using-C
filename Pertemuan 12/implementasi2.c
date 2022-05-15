@@ -170,7 +170,39 @@ void dellChild(char c, Vertex *root){
 }
 
 void preOrder(Vertex *root){
-    
+    if(root != NULL){
+        printf(" %c", root->label);
+        Vertex *ptr = root->child;
+        if(ptr != NULL){
+            if(ptr->sibling == NULL){
+                preOrder(ptr);
+            }else{
+                while(ptr->sibling != root->child){
+                    preOrder(ptr);
+                    ptr = ptr->sibling;
+                }
+                preOrder(ptr);
+            }
+        }
+    }
+}
+
+void postOrder(Vertex *root){
+    if(root != NULL){
+        Vertex *ptr = root->child;
+        if(ptr != NULL){
+            if(ptr->sibling == NULL){
+                postOrder(ptr);
+            }else{
+                while(ptr->sibling != root->child){
+                    postOrder(ptr);
+                    ptr = ptr->sibling;
+                }
+                postOrder(ptr);
+            }
+        }
+        printf(" %c", root->label);
+    }
 }
 
 
@@ -178,9 +210,9 @@ int main(){
     root = createVertex('A');
     addChild('B', root);
     addChild('C', root);
-    // printf("%c", root->child->sibling->label);
-    Vertex *cari1 ;
-    cari1 = findVertex('C', root);
-    printf("%c", cari1->label);
+    addChild('D', root);
+    preOrder(root);
+    printf("\n");
+    postOrder(root);
     return 0;
 }
