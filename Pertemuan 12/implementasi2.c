@@ -1,5 +1,4 @@
 // TREE using C
-// By Wendi Kardian
 // IMPLEMENTASI Ke -2 
 
 
