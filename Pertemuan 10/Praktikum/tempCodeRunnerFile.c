@@ -1,2 +1,2 @@
 
-	cetakGraph();
+typedef struct ruas{
