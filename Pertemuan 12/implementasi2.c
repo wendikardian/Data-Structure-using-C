@@ -1,5 +1,6 @@
 // TREE using C
 // By Wendi Kardian
+// IMPLEMENTASI Ke -2 
 
 
 #include<stdio.h>
@@ -209,10 +210,22 @@ void postOrder(Vertex *root){
 int main(){
     root = createVertex('A');
     addChild('B', root);
-    addChild('C', root);
-    addChild('D', root);
+    addChild('F', root);
+    addChild('G', root);
+    Vertex *rootB = findVertex('B', root);
+    Vertex *rootG = findVertex('G', root);
+    addChild('C', rootB);
+    addChild('D', rootB);
+    addChild('E', rootB);
+    addChild('H', rootG);
+    addChild('I', rootG);
+    Vertex *rootI = findVertex('I', rootG);
+    addChild('J', rootI);
+    addChild('K', rootI);
+    printf("============================\n        TREEE \n============================\n\n");
+    printf("PRE ORDER : \n");
     preOrder(root);
-    printf("\n");
+    printf("\nPOST ORDER : \n");
     postOrder(root);
     return 0;
 }
