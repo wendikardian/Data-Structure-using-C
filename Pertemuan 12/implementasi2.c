@@ -12,9 +12,6 @@ typedef struct vertex{
     struct vertex *child;
 }Vertex;
 
-typedef struct tree{
-    struct vertex *root;
-}Tree;
 
 Vertex *root = NULL;
 
