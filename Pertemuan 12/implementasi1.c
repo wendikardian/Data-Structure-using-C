@@ -94,7 +94,7 @@ void tambahEdge(char Vasal, char nilaiEdge[], char Vtujuan){ //menambahkan edge
 void display(){
 	simpul *tempSimpul = awal;
 	printf("|-----------------------------------------------------------| \n");
-	printf("|                 NILAI TREE                               | \n");
+	printf("|                 NILAI TREE                                | \n");
 	printf("|-----------------------------------------------------------| \n");
 	if (tempSimpul != NULL) {
 		while (tempSimpul != NULL){
