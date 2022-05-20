@@ -146,5 +146,12 @@ int main(){
 
     Graph G;
     createGraph(&G);
+    addVertex('A', &G);
+    addVertex('B', &G);
+    addVertex('C', &G);
+    addVertex('D', &G);
+    addVertex('E', &G);
+    addVertex('F', &G);
+    printGraph(G);
     return 0;
 }
