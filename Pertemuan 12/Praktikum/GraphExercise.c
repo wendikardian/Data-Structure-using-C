@@ -152,6 +152,59 @@ int main(){
     addVertex('D', &G);
     addVertex('E', &G);
     addVertex('F', &G);
+
+    Vertex *begin = findSimpul('A', G);
+    Vertex *end = findSimpul('B', G);
+    if((begin != NULL) && (end != NULL)){
+        addEdge(begin, end, 3);
+    }
+
+    begin = findSimpul('B', G);
+    end = findSimpul('D', G);
+    if((begin != NULL) && (end != NULL)){
+        addEdge(begin, end, 3);
+    }
+
+    end = findSimpul('E', G);
+    if((begin != NULL) && (end != NULL)){
+        addEdge(begin, end, 7);
+    }
+
+    begin = findSimpul('C', G);
+    end = findSimpul('A', G);
+    if((begin != NULL) && (end != NULL)){
+        addEdge(begin, end, 3);
+    }
+    
+    begin = findSimpul('D', G);
+    if((begin != NULL) && (end != NULL)){
+        addEdge(begin, end, 8);
+    }
+
+    end = findSimpul('C', G);
+    if((begin != NULL) && (end != NULL)){
+        addEdge(begin, end, 3);
+    }
+
+    begin = findSimpul('E', G);
+    end = findSimpul('D', G);
+    if((begin != NULL) && (end != NULL)){
+        addEdge(begin, end, 4);
+    }
+
+    
+    end = findSimpul('F', G);
+    if((begin != NULL) && (end != NULL)){
+        addEdge(begin, end, 4);
+    }
+
+    begin = findSimpul('F', G);
+    end = findSimpul('D', G);
+    if((begin != NULL) && (end != NULL)){
+        addEdge(begin, end, 2);
+    }
+
+    
     printGraph(G);
     return 0;
 }
