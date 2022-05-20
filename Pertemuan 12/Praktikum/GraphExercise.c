@@ -256,7 +256,9 @@ int main(){
     // if(begin != NULL){
     //     delEdge('C', begin);
     // }
+
     begin = findVertex('D', G);
+    
     // G.first = NULL;
     delAll(begin);
 
