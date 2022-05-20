@@ -1,3 +1,5 @@
-for i in range(column):
-#     for j in range(row):
-#         matriks[i][j] = 0
+for i in s2:
+        if i in ht:
+            ht[i] -= 1
+        else:
+            ht[i] = 1
