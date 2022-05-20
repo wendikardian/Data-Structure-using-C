@@ -61,9 +61,9 @@ void addEdge(Vertex *first, Vertex *dest, int weight){
 }
 
 
-Edge *findSimpul(char c, Graph G){
-    Edge *result = NULL;
-    Edge *ptr = G.first;
+Vertex *findVertex(char c, Graph G){
+    Vertex *result = NULL;
+    Vertex *ptr = G.first;
 
     int find = 0;
     while((ptr != NULL) && (find == 0)){
@@ -124,14 +124,59 @@ void delAll(Vertex *first){
     }
 }
 
+void delVertex(char c, Graph *G){
+    Vertex *del = (*G).first;
+    if(del != NULL){
+        Vertex *prev = NULL;
+        int find = 0;
+        while((del != NULL) && (find == 0)){
+            if(del->label == c){
+                find == 1;
+            }else{
+                prev = del;
+                del = del->next;
+            }
+        }
+        if(find == 1){
+            Vertex *ptr;
+            ptr = (*G).first;
+
+            while(ptr != NULL){
+                if(ptr != del){
+                    delEdge(del->label, ptr);
+                }
+                ptr = ptr->next;
+            }
+            delAll(del);
+
+            if(prev == NULL){
+                (*G).first = del->next;
+                del->next = NULL;
+            }else{
+                if(del->next == NULL){
+                    prev->next = NULL;
+                }else{
+                    prev->next = del->next;
+                    del->next = NULL;
+                }
+            }
+            free(del);
+        }else{
+            printf("Vertex not found \n");
+        }
+    }else{
+        printf("Vertex not found \n");
+    }
+}
+
 void printGraph(Graph G){
     Vertex *ptr = G.first;
     if(ptr != NULL){
         while(ptr != NULL){
             printf("Simpul : %c\n", ptr->label);
-            Vertex *ptr_vertex = ptr->arc;
+            Edge *ptr_vertex = ptr->arc;
             while(ptr_vertex != NULL){
-                printf("    - to vertex : %c with weight %d \n", ptr_vertex->label, ptr_vertex->label);
+                printf("    - to vertex : %c with weight %d \n", ptr_vertex->destination->label, ptr_vertex->label);
                 ptr_vertex = ptr_vertex->next;
             }
             ptr= ptr->next;
@@ -153,58 +198,69 @@ int main(){
     addVertex('E', &G);
     addVertex('F', &G);
 
-    Vertex *begin = findSimpul('A', G);
-    Vertex *end = findSimpul('B', G);
+    Vertex *begin = findVertex('A', G);
+    Vertex *end = findVertex('B', G);
     if((begin != NULL) && (end != NULL)){
         addEdge(begin, end, 3);
     }
 
-    begin = findSimpul('B', G);
-    end = findSimpul('D', G);
+    begin = findVertex('B', G);
+    end = findVertex('D', G);
     if((begin != NULL) && (end != NULL)){
         addEdge(begin, end, 3);
     }
 
-    end = findSimpul('E', G);
+    end = findVertex('E', G);
     if((begin != NULL) && (end != NULL)){
         addEdge(begin, end, 7);
     }
 
-    begin = findSimpul('C', G);
-    end = findSimpul('A', G);
+    begin = findVertex('C', G);
+    end = findVertex('A', G);
     if((begin != NULL) && (end != NULL)){
         addEdge(begin, end, 3);
     }
     
-    begin = findSimpul('D', G);
+    begin = findVertex('D', G);
     if((begin != NULL) && (end != NULL)){
         addEdge(begin, end, 8);
     }
 
-    end = findSimpul('C', G);
+    end = findVertex('C', G);
     if((begin != NULL) && (end != NULL)){
         addEdge(begin, end, 3);
     }
 
-    begin = findSimpul('E', G);
-    end = findSimpul('D', G);
+    begin = findVertex('E', G);
+    end = findVertex('D', G);
     if((begin != NULL) && (end != NULL)){
         addEdge(begin, end, 4);
     }
 
     
-    end = findSimpul('F', G);
+    end = findVertex('F', G);
     if((begin != NULL) && (end != NULL)){
         addEdge(begin, end, 4);
     }
 
-    begin = findSimpul('F', G);
-    end = findSimpul('D', G);
+    begin = findVertex('F', G);
+    end = findVertex('D', G);
     if((begin != NULL) && (end != NULL)){
         addEdge(begin, end, 2);
     }
 
-    
+    printf("==== DATA GRAPH ======\n\n");
+    printGraph(G);
+
+    // begin = findVertex('D', G);
+    // if(begin != NULL){
+    //     delEdge('C', begin);
+    // }
+    begin = findVertex('D', G);
+    // G.first = NULL;
+    delAll(begin);
+
+    printf("\n\n==== AFTER DELETED ======\n\n");
     printGraph(G);
     return 0;
 }
