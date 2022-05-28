@@ -193,47 +193,122 @@ void preOrder(Vertex *root){
     }
 }
 
-void traversal(char c[],Vertex *root){
-    Vertex *child;
+int find = 0;
+Vertex *tmpParent = NULL;
+void dataSearch(char c[], Vertex *root){
+    
     if(root != NULL){
-        child = root->child;
-        if(strcmp(child->data, c) == 0){
-            printf("Parent :  %s", root->data);
-        }else{
-            child = child->sibling;
-             while(child != root->child){
-            if(strcmp(child->data, c) == 0){
-                printf("Parent :  %s", root->data);
+        if(strcmp(c, root->data) == 0){
+            find = 1;
+            if(root->child != NULL){
+                Vertex *child = root->child;
+                printf("\nChild : %s -", child);
+                child = child->sibling;
+                while(child != root->child){
+                    printf(" %s -", child->data);
+                    child = child->sibling;
+                }
+            }else{
+                printf("\nChild doesnt exist");
+                
             }
-            child = child->sibling;
+            return;
         }
-        if(strcmp(child->data, c) == 0){
-            printf("\nData : %s \n", child->data);
-            // printf("%s - ", child->data);
-            // while(child->sibling != root->child){
-            //     child = child->sibling;
-            //     printf("%s - ", child->data);
-            // }
-
-        }
+        // printf(" %s - ", root->data);
         Vertex *ptr = root->child;
         if(ptr != NULL){
             if(ptr->sibling == NULL){
-                traversal(c, ptr);
+                if(find == 0){
+                    tmpParent = root;
+                }
+                dataSearch(c, ptr);
             }else{
                 while(ptr->sibling != root->child){
-                    traversal(c, ptr);
+                    if(find == 0){
+                        tmpParent = root;
+                    }
+                    dataSearch(c, ptr);
                     ptr = ptr->sibling;
                 }
-                traversal(c, ptr);
+                if(find == 0){
+                    tmpParent = root;
+                }
+                dataSearch(c, ptr);
+                
             }
         }
-        }
-       
-    }else{
-        printf("\nData doesnt exist");
+    }
+    if(strcmp(root->data, "Leuwigajah") == 0 && strcmp(c, "Leuwigajah") != 0 && find == 0){
+        printf("\nData tidak ditemukan");
+        tmpParent = NULL;
     }
 }
+
+void printChild(Vertex *root){
+    if(root->child != NULL){
+        Vertex *child = root->child;
+        if(child->sibling != NULL){
+            printf("\nChild : %s ", child->data);
+            child = child->sibling;
+            while(child != root->child){
+                printf(" %s - ", child->data);
+                child = child->sibling;
+            }
+        }
+    }else{
+        printf("\n Data tidak memiliki child");
+        
+    }
+}
+
+// void traversal(char c[],Vertex *root){
+//     Vertex *child;
+//     if(root != NULL){
+//         child = root->child;
+//         if(strcmp(child->data, c) == 0){
+//             printf("hello\n");
+//             printf("Parent :  %s", root->data);
+//             printChild(child);
+//         }else{
+//             child = child->sibling;
+//             while(child != root->child){
+//                 if(strcmp(child->data, c) == 0){
+//                     printf("Parent :  %s", root->data);
+//                     printChild(child);
+//                     return;
+//                 }
+//                 if(child == root->child){
+//                     traversal(c, child);
+//                 }
+//                 child = child->sibling;
+//             }
+//         // if(strcmp(child->data, c) == 0){
+//         //     printf("\nData : %s \n", child->data);
+//         //     // printf("%s - ", child->data);
+//         //     // while(child->sibling != root->child){
+//         //     //     child = child->sibling;
+//         //     //     printf("%s - ", child->data);
+//         //     // }
+
+//         // }
+//         Vertex *ptr = root->child;
+//         if(ptr != NULL){
+//             if(ptr->sibling == NULL){
+//                 traversal(c, ptr);
+//             }else{
+//                 while(ptr->sibling != root->child){
+//                     traversal(c, ptr);
+//                     ptr = ptr->sibling;
+//                 }
+//                 traversal(c, ptr);
+//             }
+//         }
+//         }
+       
+//     }else{
+//         printf("\nData doesnt exist");
+//     }
+// }
 
 void postOrder(Vertex *root){
     if(root != NULL){
@@ -343,7 +418,6 @@ int main(int argc, char **argv){
         printf("\n1. Print Pre Order");
         printf("\n2. Print Post Order");
         printf("\n3. Cari vertex");
-        printf("\n4. Tambah data");
         printf("\n5. Exit\nPilihan anda :");
         scanf("%d", &i);
         switch (i){
@@ -358,6 +432,7 @@ int main(int argc, char **argv){
             case 3:
                 printf("Masukan data : ");
                 scanf(" %[^\n]s ",search);
+                tmpParent = NULL;
                 // toFindVertex = findVertex(search, root);
                 // if(toFindVertex != NULL){
                 //     printf("Data : %s", toFindVertex);
@@ -376,9 +451,15 @@ int main(int argc, char **argv){
                 // }else{
                 //     printf("\nData doesnt exist");
                 // }
-                traversal(search, root);
-                break;
-            case 4:
+                find = 0;
+                dataSearch(search, root);
+                if(strcmp(search, root->data) != 0 && tmpParent != NULL){
+                    printf("\nParent : %s ", tmpParent->data);
+                }else{
+                    if(find != 0){
+                        printf("\nParent doesnt exist");
+                    }
+                }
                 break;
             default:
                 printf("\nBYE");
