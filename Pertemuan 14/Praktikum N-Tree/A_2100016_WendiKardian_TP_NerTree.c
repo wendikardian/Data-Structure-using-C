@@ -319,7 +319,7 @@ int main(int argc, char **argv){
     addChild("Purwosari", rootBaturaden);
     addChild("Batuanten", rootCilongok);
     addChild("Cikidang", rootCilongok);
-    addChild("Cilongok", rootCilongok);
+    addChild("Cipete", rootCilongok);
     Vertex *rootLimpung = findVertex("Limpung", rootBatang);
     Vertex *rootPecalungan = findVertex("Pecalungan", rootBatang);
     Vertex *rootBandar = findVertex("Bandar", rootBatang);
