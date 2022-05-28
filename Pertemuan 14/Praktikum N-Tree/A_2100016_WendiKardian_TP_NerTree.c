@@ -244,7 +244,7 @@ void dataSearch(char c[], Vertex *root){
         }
     }
     if(strcmp(root->data, "Leuwigajah") == 0 && strcmp(c, "Leuwigajah") != 0 && find == 0){
-        printf("\nData tidak ditemukan");
+        printf("\nDaerah tidak ditemukan");
         tmpParent = NULL;
     }
 }
