@@ -4,6 +4,7 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<ctype.h>
 // #include<string.h>
 
 typedef struct vertex{
@@ -13,7 +14,6 @@ typedef struct vertex{
 }Vertex;
 
 
-Vertex *root = NULL;
 
 Vertex * createVertex(char data[100]){
     Vertex *new = (Vertex*)malloc(sizeof(Vertex));
@@ -47,6 +47,7 @@ void addChild(char c[], Vertex *root){
 }
 
 Vertex *findVertex(char c[], Vertex *root){
+    // printf("\nData : %s \n", c);
     Vertex *result = NULL;
     if(root != NULL){
         if(strcmp(root->data, c) == 0){
@@ -56,7 +57,9 @@ Vertex *findVertex(char c[], Vertex *root){
             if(ptr != NULL){
                 if(ptr->sibling == NULL){
                     if(strcmp(ptr->data, c) == 0){
+                        printf("Parent : %s \n", root->data);
                         result =  ptr;
+                        return result;
                     }else{
                         result = findVertex(c, ptr);
                     }
@@ -64,8 +67,10 @@ Vertex *findVertex(char c[], Vertex *root){
                     int find = 0;
                     while(ptr->sibling != root->child && (find == 0)){
                         if(strcmp(ptr->data, c) == 0){
+                            printf("Parent : %s \n", root->data);
                             result = ptr;
                             find = 1;
+                            return result;
                         }else{
                             result = findVertex(c, ptr);
                             ptr = ptr->sibling;
@@ -73,7 +78,9 @@ Vertex *findVertex(char c[], Vertex *root){
                     }
                 if(find == 0){
                     if(strcmp(ptr->data, c) == 0){
+                        printf("Parent : %s \n", root->data);
                         result = ptr;
+                        return result;
                     }else{
                         result = findVertex(c, ptr);
                     }
@@ -82,6 +89,7 @@ Vertex *findVertex(char c[], Vertex *root){
             }
         }
     }
+    // printf("Parent : %s\n", root->data);
     return result;
 }
 
@@ -185,6 +193,48 @@ void preOrder(Vertex *root){
     }
 }
 
+void traversal(char c[],Vertex *root){
+    Vertex *child;
+    if(root != NULL){
+        child = root->child;
+        if(strcmp(child->data, c) == 0){
+            printf("Parent :  %s", root->data);
+        }else{
+            child = child->sibling;
+             while(child != root->child){
+            if(strcmp(child->data, c) == 0){
+                printf("Parent :  %s", root->data);
+            }
+            child = child->sibling;
+        }
+        if(strcmp(child->data, c) == 0){
+            printf("\nData : %s \n", child->data);
+            // printf("%s - ", child->data);
+            // while(child->sibling != root->child){
+            //     child = child->sibling;
+            //     printf("%s - ", child->data);
+            // }
+
+        }
+        Vertex *ptr = root->child;
+        if(ptr != NULL){
+            if(ptr->sibling == NULL){
+                traversal(c, ptr);
+            }else{
+                while(ptr->sibling != root->child){
+                    traversal(c, ptr);
+                    ptr = ptr->sibling;
+                }
+                traversal(c, ptr);
+            }
+        }
+        }
+       
+    }else{
+        printf("\nData doesnt exist");
+    }
+}
+
 void postOrder(Vertex *root){
     if(root != NULL){
         Vertex *ptr = root->child;
@@ -205,6 +255,8 @@ void postOrder(Vertex *root){
 
 
 int main(int argc, char **argv){
+    
+    Vertex *root = NULL;
     root = createVertex("Jawa Barat");
     addChild("Bekasi", root);
     addChild("Bandung", root);
@@ -274,18 +326,23 @@ int main(int argc, char **argv){
     addChild("Cibeber", rootCimahiSelatan);
     addChild("Melong", rootCimahiSelatan);
     addChild("Leuwigajah", rootCimahiSelatan);
+    system("cls");
 
 
-
-    
-    int i;
+    // Vertex *text = findVertex("Bogor Selatan", root);
+    // printf("%s", text->child->data);
+    int i,j,k;
+    Vertex *toFindVertex;
+    char search[100];
+    Vertex *tmpRoot = root;
+    Vertex *tmpFirst;
     while(i != 5){
         printf("\n\n============================\n        TREEE \n============================\n\n");
         printf("\nSelamat datang di data kelurahan Jawa Barat : ");
         printf("\nAdapun beberapa menu yang ada disini adalah");
         printf("\n1. Print Pre Order");
         printf("\n2. Print Post Order");
-        printf("\n3. Liat data berdasarkan level");
+        printf("\n3. Cari vertex");
         printf("\n4. Tambah data");
         printf("\n5. Exit\nPilihan anda :");
         scanf("%d", &i);
@@ -299,12 +356,37 @@ int main(int argc, char **argv){
                 postOrder(root);
                 break;
             case 3:
+                printf("Masukan data : ");
+                scanf(" %[^\n]s ",search);
+                // toFindVertex = findVertex(search, root);
+                // if(toFindVertex != NULL){
+                //     printf("Data : %s", toFindVertex);
+                //     toFindVertex = toFindVertex->child;
+                //     tmpFirst = toFindVertex;
+                //     printf("\nChild : %s - ", toFindVertex->data);
+                //     toFindVertex = toFindVertex->sibling;
+                //     if(toFindVertex != NULL){
+                //         while(toFindVertex != tmpFirst){
+                //             printf(" %s - ", toFindVertex->data);
+                //             toFindVertex = toFindVertex->sibling;
+                //         }
+                //     }else{
+                //         printf("\nData doesnt exist");
+                //     }
+                // }else{
+                //     printf("\nData doesnt exist");
+                // }
+                traversal(search, root);
                 break;
             case 4:
                 break;
-            case 5:
+            default:
+                printf("\nBYE");
                 break;
         }
+        printf("\n\nPress ENTER key to Continue\n");  
+        _getch();
+        system("cls");
     }
     
     
