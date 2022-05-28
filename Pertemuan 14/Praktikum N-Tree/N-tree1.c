@@ -273,15 +273,15 @@ void postOrder(Vertex *root){
 int main(int argc, char **argv){
     // Root untuk tree
     Vertex *root = NULL;
-    root = createVertex("Jawa Barat"); //Membuat root dengan kota Jawa Tengah
+    root = createVertex("Jawa Tengah"); //Membuat root dengan kota Jawa Tengah
 
     // Proses Input Data
-    addChild("Bekasi", root);
-    addChild("Bandung", root);
-    addChild("Bogor", root);
-    addChild("Cimahi", root);
-    Vertex *rootBekasi = findVertex("Bekasi", root);
-    Vertex *rootBandung = findVertex("Bandung", root);
+    addChild("Banjarnegara", root);
+    addChild("Bayumas", root);
+    addChild("Batang", root);
+    addChild("Blora", root);
+    Vertex *rootBanjarnegara = findVertex("Banjarnegara", root);
+    Vertex *rootBayumas = findVertex("Bayumas", root);
     Vertex *rootBogor = findVertex("Bogor", root);
     Vertex *rootCimahi = findVertex("Cimahi", root);
     addChild("Bekasi Barat", rootBekasi);
