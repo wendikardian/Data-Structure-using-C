@@ -24,6 +24,7 @@ void power(int F[2][2], int n){
     }
 }
 
+
 int fibonnaci_matrix(int n){
     int F[2][2] = {{1,1}, {1,0}};
     if(n == 0){
