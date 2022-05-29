@@ -354,7 +354,7 @@ int main(int argc, char **argv){
     Vertex *tmpFirst;
     while(i != 4){
         printf("============================\n    TREEE JAWA TENGAH \n   By : Wendi Kardian   \n============================\n\n");
-        printf("\nSelamat datang di data kelurahan Jawa Barat : ");
+        printf("\nSelamat datang di data kelurahan Jawa Tengah : ");
         printf("\nAdapun beberapa menu yang ada disini adalah");
         printf("\n1. Print Pre Order");
         printf("\n2. Print Post Order");
