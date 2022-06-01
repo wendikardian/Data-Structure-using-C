@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #define MAX 10
 typedef struct{
     char nim[10];
@@ -41,7 +42,7 @@ void addData(char nim[], char nama[], float nilai, Queue *Q){
         (*Q).last = 0;
         strcpy((*Q).data[0].nim, nim);
         strcpy((*Q).data[0].nama, nama);
-        (*Q).data[10].nilai = nilai;
+        (*Q).data[0].nilai = nilai;
     }else{
         if(isFull(*Q) != 1){
             (*Q).last += 1;
@@ -71,13 +72,28 @@ void delData(Queue *Q){
 
 void printQueue(Queue Q){
     if(Q.first != -1){
-        
+        int i;
+        printf("\nData dalam Queue\n");
+        for(i = Q.last; i>=Q.first; i--){
+            printf("\nNIM : %s", Q.data[i].nim);
+            printf("\nNAMA : %s", Q.data[i].nama);
+            printf("\nNILAI : %f\n", Q.data[i].nilai);
+        }
     }else{
         printf("Queue undeflow\n");
     }
 }
 
 int main(){
-
+    Queue Q;
+    createQueue(&Q);
+    printQueue(Q);
+    printf("\n=======\n");
+    addData("2100016", "WendiKardian", 10.2, &Q);
+    addData("21021312", "Abdul", 20.9, &Q);
+    addData("210212124", "Jizo", 90.2, &Q);
+    printQueue(Q);
+    delData(&Q);
+    printQueue(Q);
     return 0;
 }
