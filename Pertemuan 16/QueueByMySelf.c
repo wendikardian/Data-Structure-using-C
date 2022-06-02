@@ -22,8 +22,7 @@ int isFull(Queue* Q){
 }
 
 int isEmpty(Queue* Q){
-    if((*Q).head == -1){
-        printf("Data Kosong\n");
+    if((*Q).tail == -1){
         return 1;
     }else{
         return 0;
@@ -53,6 +52,7 @@ void delData(Queue* Q){
 
 void printData(Queue* Q){
     int i;
+    printf("\n");
     for(i=0; i<=(*Q).tail; i++){
         printf("%d ",(*Q).data[i]);
     }
@@ -67,6 +67,8 @@ int main(){
     addData(3,&Q);
     addData(4,&Q);
     addData(5,&Q);
+    printData(&Q);
+    delData(&Q);
     printData(&Q);
     delData(&Q);
     printData(&Q);
