@@ -21,6 +21,15 @@ int isFull(Queue* Q){
     }
 }
 
+int isEmpty(Queue* Q){
+    if((*Q).head == -1){
+        printf("Data Kosong\n");
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
 void addData(int data, Queue* Q){
     if(isFull(Q) != 1) {
         (*Q).tail+=1;
@@ -30,12 +39,36 @@ void addData(int data, Queue* Q){
     }
 }
 
+void delData(Queue* Q){
+    if(isEmpty(Q) != 1){
+        int i;
+        for(i = 0; i<(*Q).tail; i++){
+            (*Q).data[i] = (*Q).data[i+1];
+        }
+        (*Q).tail -= 1;
+    }else{
+        printf("Queue Underflow\n");
+    }
+}
+
+void printData(Queue* Q){
+    int i;
+    for(i=0; i<=(*Q).tail; i++){
+        printf("%d ",(*Q).data[i]);
+    }
+}
 
 int main(){
     Queue Q;
     createEmpty(&Q);
+    isEmpty(&Q);
+    delData(&Q);
     addData(2,&Q);
     addData(3,&Q);
-    printf("%d %d",Q.data[0], Q.data[1]);
+    addData(4,&Q);
+    addData(5,&Q);
+    printData(&Q);
+    delData(&Q);
+    printData(&Q);
     return 0;
 }
