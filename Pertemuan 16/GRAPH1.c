@@ -17,10 +17,10 @@ typedef struct{
     Vertex *first;
 }Graph;
 
-
 void createEmpty(Graph *G){
     (*G).first = NULL;
 }
+
 void addVertex(Graph *G, int data){
     Vertex *new = (Vertex *) malloc(sizeof(Vertex));
     new->data = data;

@@ -10,7 +10,7 @@ typedef struct vertex{
 typedef struct tree{
     Vertex *root;
 }Tree;
-
+   
 void makeTree(int c, Tree *T){
     Vertex *new;
     new = (Vertex*)malloc(sizeof(Vertex));
