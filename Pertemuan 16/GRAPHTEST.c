@@ -86,6 +86,20 @@ Vertex *findVertex(Graph *G, char nama[]){
     return NULL;
 }
 
+// void findShort(Vertex *first, Vertex *last){
+//     Edge *ptr = first->arc;
+//     int total = 0;
+//     if(ptr != NULL){
+//         while(ptr != NULL){
+//             while(ptr!=NULL){
+//                 if(ptr->destination == first){
+//                     printf("%")
+//                 }
+//             }
+            
+//         }
+//     }
+// }
 
 int main(){
     Graph G;
@@ -123,5 +137,6 @@ int main(){
     addEdge(rumahRudi,rumahAmel,11);
     addEdge(rumahRudi,rumahTeti,10);
     printGraph(&G);   
+    Vertex* arrRumah[10] = {rumahKiki, rumahAnton, rumahTeti, rumahMalik, rumahAmel, rumahRudi, rumahBudi};
 
 }
