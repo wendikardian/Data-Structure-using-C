@@ -1,0 +1,12 @@
+addEdge(rumahKiki, rumahAnton, 2);
+    // addEdge(rumahKiki, rumahTeti, 8);
+    // addEdge(rumahAnton, rumahKiki, 2);
+    // addEdge(rumahAnton, rumahMalik, 3);
+    // addEdge(rumahAnton, rumahAmel, 6);
+    // addEdge(rumahTeti, rumahKiki,8);
+    // addEdge(rumahTeti, rumahMalik,4);
+    // addEdge(rumahTeti, rumahRudi,10);
+    // addEdge(rumahMalik,rumahAnton,3);
+    // addEdge(rumahMalik,rumahTeti,4);
+    // addEdge(rumahMalik,rumahAmel,3);
+    // addEdge(rumahAmel,rumahAnton,6);
